@@ -1,0 +1,12 @@
+streamlit
+pypdf2
+langchain
+openai
+youtube-transcript-ap
+embedchain[youtube]
+pytube
+langgraph
+langgraph-checkpoint-sqlite
+langchain-community 
+pymupdf
+
