@@ -12,3 +12,5 @@ python-dotenv==1.0.1
 pytube
 streamlit==1.40.1
 typing_extensions==4.12.2
+sqlite3==3.35.0
+pysqlite3-binary
