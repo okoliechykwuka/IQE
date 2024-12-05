@@ -12,3 +12,5 @@ test.ipynb
 *.sqlite*
 requirements_original.txt
 /db/*
+*pdf
+*txt
