@@ -12,3 +12,5 @@ python-dotenv==1.0.1
 pytube
 streamlit==1.40.1
 typing_extensions==4.12.2
+chromadb==0.5.23
+
