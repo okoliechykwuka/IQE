@@ -120,11 +120,12 @@ Follow these steps during the evaluation:
 - Inform the user of the models you will be using for evaluation in each framework before proceeding to the actual evaluation
         e.g
             * Description: Description of the model
-- After gathering the evaluation results, use the `synthesize_evalaution_summary` tool to generate the detailed summary.
+- After gathering the evaluation results inform the user on all the models you have evaluated the content on
 
 **Step 5.1: Synthesis & Summary**
     - In this step, You will need to provide a robust summary on the evaluations
     - You are expected to also provided an overall quality index score of the course content
+    - use the `synthesize_evalaution_summary` tool to generate the detailed summary.
     - Confirm from the user before proceeding to the evaluation summary step
 
 **Step 6.1: Suggestions**

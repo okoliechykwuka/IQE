@@ -10,9 +10,9 @@ from embedchain import App
 from langchain_core.tools import tool
 from assets.prompts import (dick_specific_prompt, shackilton_specific_prompt, sam_specific_prompt, arches_specific_prompt, 
                      wiggins_specific_prompt, action_specific_prompt, decisive_specific_prompt,
-                     addie_specific_prompt, behavior_specific_prompt, mager_specific_prompt,summary_synthesis_prompt,
+                     addie_specific_prompt, behavior_specific_prompt, mager_specific_prompt,
                      CRITIQUE_PROMPT)
-from evalresources import transfer_resources, design_resources, performance_resources
+
 from typing import List
 from abc import abstractmethod, ABC
 
@@ -27,13 +27,7 @@ def load_chromadb(collection_name: str, db_path:str, resources: List[str]):
     print("loaded")
 
 
-if not (os.path.exists("./IQE/db/chroma.sqlite3") or os.path.exists("./db/chroma.sqlite3")):
-    print("Setting Evaluation Knowledge Base")
-    load_chromadb(collection_name="design_framework", db_path="./db", resources=design_resources)
-    load_chromadb(collection_name="transfer_framework", db_path="./db", resources=transfer_resources)
-    load_chromadb(collection_name="performance_framework", db_path="./db", resources=performance_resources)
-else:
-    print("Knowledge Base Detected")
+
 
 class Evaluator(ABC):
     def __init__(self, collection_name, db_path, prompt, content):

@@ -3,9 +3,10 @@ from io import BytesIO
 from markdown_pdf import MarkdownPdf, Section
 import os
 from utils.processors import PDFProcessor, VideoProcessor, AudioProcessor, DummyProcessor
-from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator
+from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator, load_chromadb
 from utils.workflow import summarizer, workflow_builder, evaluation_summarizer
 from assets.prompts import SYSTEM_PROMPT, DESIGN_BASE_PROMPT, TRANSFER_BASE_PROMPT, PERFORMANCE_BASE_PROMPT
+from assets.evalresources import transfer_resources, design_resources, performance_resources
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, ToolMessage
 st.session_state['report_status']  = False
@@ -28,7 +29,7 @@ if not 'thread_id' in st.session_state:
 # Configure a user thread
 config = {'configurable':{'thread_id':st.session_state['thread_id']}}
 graph = workflow_builder()
-st.session_state['content_summary'] = None
+# st.session_state['content_summary'] = None
 class CourseEvaluatorApp:
     def __init__(self):
         self.setup_streamlit()
@@ -47,10 +48,6 @@ class CourseEvaluatorApp:
         self.audio_processor = AudioProcessor()
         self.dummy_processor = DummyProcessor()
 
-    # def initialize_evaluators(self):
-    #     self.design_evaluator = DesignEvaluator()
-    #     self.transfer_evaluator = TransferEvaluator()
-    #     self.performance_evaluator = PerformanceEvaluator()
 
         
     def process_file(self, file):
@@ -237,37 +234,48 @@ class CourseEvaluatorApp:
 
         # Title at the top of the page
         st.markdown('<h1 class="main-title">Instructional Quality Prototype (IQA)</h1>', unsafe_allow_html=True)
-        st.markdown(
-            """
-            Welcome to the Instructional Quality Prototype.  I am your virtual IQP guide or co-researcher and I’ll be walking you through a variety of steps to evaluate your course.  
-            This process includes a number of  steps. I will keep you informed along the way. You can ask me to repeat a step.
-            You can also guide me and build on my ideas, with me or separately. You are in the driver’s seat; I am just your tool. 
-            """
-        )
 
-        # Create columns for prompts
-        col1, col2, col3, col4 = st.columns(4)
-
-        with col1:
-            st.button("Evaluate a sales course")
-                # st.session_state["starter_prompt"] = "Evaluate a sales course"
-                
-
-        with col2:
-            st.button("Assess onboarding material")
-                # st.session_state["starter_prompt"] = "Assess onboarding material"
+        if "content_summary" not in st.session_state:
+            st.markdown(
+                """
+                Welcome to the Instructional Quality Prototype.  I am your virtual IQP guide or co-researcher and I’ll be walking you through a variety of steps to evaluate your course.  
+                This process includes a number of  steps. I will keep you informed along the way. You can ask me to repeat a step.
+                You can also guide me and build on my ideas, with me or separately. You are in the driver’s seat; I am just your tool. 
+                """
+            )
 
 
-        with col3:
-            st.button("Review compliance training")
-                # st.session_state["starter_prompt"] = "Review compliance training"
+            
+            # Create columns for prompts
+            col1, col2, col3, col4 = st.columns(4)
 
-        with col4:
-            st.button("Analyze leadership workshop")
-                # st.session_state["starter_prompt"] = "Analyze leadership workshop"
+            
 
-        with st.columns(1)[0]:
-            st.write("")
+            with col1:
+                st.button("Evaluate a sales course")
+                    # st.session_state["starter_prompt"] = "Evaluate a sales course"
+                    
+
+            with col2:
+                st.button("Assess onboarding material")
+                    # st.session_state["starter_prompt"] = "Assess onboarding material"
+
+
+            with col3:
+                st.button("Review compliance training")
+                    # st.session_state["starter_prompt"] = "Review compliance training"
+
+            with col4:
+                st.button("Analyze leadership workshop")
+                    # st.session_state["starter_prompt"] = "Analyze leadership workshop"
+        else:
+            with st.columns(1)[0]:
+                st.markdown(
+                """
+               
+
+                """
+            )
 
 
         # Step 3.1: Confirmation Page
@@ -294,6 +302,8 @@ class CourseEvaluatorApp:
         
             st.session_state['content'] = content
 
+        
+
         if 'design_evaluator' not in st.session_state:
             with st.spinner("Building Evaluator Models"):
                 design = DesignEvaluator(collection_name='design_framework', db_path="./db", prompt=DESIGN_BASE_PROMPT, content=content)
@@ -304,10 +314,13 @@ class CourseEvaluatorApp:
         if 'transfer_evaluator' not in st.session_state:
             st.session_state['transfer_evaluator'] = TransferEvaluator(collection_name='transfer_framework', db_path="./db", prompt=TRANSFER_BASE_PROMPT, content=content)
             
-        if not st.session_state["content_summary"] is None:
-                st.subheader("Extracted Content Summary")
+
+        if "content_summary" in st.session_state:
+            print("GOT HERE")
+            st.subheader("Extracted Content Summary")
                
         else:
+            
             with st.spinner("Detecting Content Scope"):
                 summary = summarizer(st.session_state['content'])
                 st.session_state["content_summary"] = summary
@@ -367,5 +380,12 @@ class CourseEvaluatorApp:
                 
 if __name__ == "__main__":
     app = CourseEvaluatorApp()
+    if not (os.path.exists("./IQE/db/chroma.sqlite3") or os.path.exists("./db/chroma.sqlite3")):
+        print("Setting Evaluation Knowledge Base")
+        load_chromadb(collection_name="design_framework", db_path="./db", resources=design_resources)
+        load_chromadb(collection_name="transfer_framework", db_path="./db", resources=transfer_resources)
+        load_chromadb(collection_name="performance_framework", db_path="./db", resources=performance_resources)
+    else:
+        print("Knowledge Base Detected")
     # app.setup_streamlit()
     app.main()

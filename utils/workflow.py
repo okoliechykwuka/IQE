@@ -17,7 +17,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 import sqlite3
 from typing import Dict, Any, Annotated
 from assets.prompts import SYSTEM_PROMPT, summary_synthesis_prompt
-from evaluator import Tools
+from utils.evaluator import Tools
 
 
 load_dotenv(find_dotenv())
