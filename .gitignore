@@ -1,7 +1,16 @@
 venv/
 __pycache__/
 node_modules/
-.env
+*.env
 *.log
 test.ipynb/
 test.ipynb
+*.ipynb
+*.mp3
+*.mp4
+*.avr
+*.sqlite*
+requirements_original.txt
+/db/*
+*pdf
+*txt
