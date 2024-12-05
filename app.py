@@ -278,6 +278,9 @@ class CourseEvaluatorApp:
 
                 """
             )
+                
+        st.divider()
+        st.write("")
 
 
         # Step 3.1: Confirmation Page

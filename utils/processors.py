@@ -11,6 +11,11 @@ from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 api_key = os.environ['OPENAI_API_KEY']
+
+if api_key is None:
+    st.error("Please set your OpenAI API key in the .env file")
+else:
+    api_key = st.secrets["OPENAI_API_KEY"]
 ## Set the API key
 client = OpenAI(api_key=api_key)
 
