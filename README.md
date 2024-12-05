@@ -1,5 +1,3 @@
-Here’s a detailed `README.md` file for your app to help your users understand how to use it effectively:
-
 # Instructional Quality Prototype (IQA)
 
 Welcome to the **Instructional Quality Prototype (IQA)**! This application is a virtual evaluation assistant designed to help you assess and improve the quality of your instructional materials. Whether you're working on course design, transferability, or performance improvement, IQA has you covered.
