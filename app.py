@@ -2,10 +2,10 @@ import streamlit as st
 from io import BytesIO
 from markdown_pdf import MarkdownPdf, Section
 import os
-from processors import PDFProcessor, VideoProcessor, AudioProcessor, DummyProcessor
-from evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator
-from workflow import summarizer, workflow_builder, evaluation_summarizer
-from prompts import SYSTEM_PROMPT, DESIGN_BASE_PROMPT, TRANSFER_BASE_PROMPT, PERFORMANCE_BASE_PROMPT
+from utils.processors import PDFProcessor, VideoProcessor, AudioProcessor, DummyProcessor
+from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator
+from utils.workflow import summarizer, workflow_builder, evaluation_summarizer
+from assets.prompts import SYSTEM_PROMPT, DESIGN_BASE_PROMPT, TRANSFER_BASE_PROMPT, PERFORMANCE_BASE_PROMPT
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, ToolMessage
 st.session_state['report_status']  = False

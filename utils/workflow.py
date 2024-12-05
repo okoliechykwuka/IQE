@@ -16,7 +16,7 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver
 import sqlite3
 from typing import Dict, Any, Annotated
-from prompts import SYSTEM_PROMPT, summary_synthesis_prompt
+from assets.prompts import SYSTEM_PROMPT, summary_synthesis_prompt
 from evaluator import Tools
 
 

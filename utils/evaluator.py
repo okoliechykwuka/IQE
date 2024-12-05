@@ -8,7 +8,7 @@ from embedchain.config import ChromaDbConfig
 from embedchain.vectordb.chroma import ChromaDB
 from embedchain import App
 from langchain_core.tools import tool
-from prompts import (dick_specific_prompt, shackilton_specific_prompt, sam_specific_prompt, arches_specific_prompt, 
+from assets.prompts import (dick_specific_prompt, shackilton_specific_prompt, sam_specific_prompt, arches_specific_prompt, 
                      wiggins_specific_prompt, action_specific_prompt, decisive_specific_prompt,
                      addie_specific_prompt, behavior_specific_prompt, mager_specific_prompt,summary_synthesis_prompt,
                      CRITIQUE_PROMPT)
