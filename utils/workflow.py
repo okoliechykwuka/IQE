@@ -22,7 +22,7 @@ from utils.evaluator import Tools
 
 load_dotenv(find_dotenv())
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
 
 
 # Define all the chains
