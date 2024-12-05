@@ -5,3 +5,7 @@ node_modules/
 *.log
 test.ipynb/
 test.ipynb
+*.ipynb
+*.mp3
+*.mp4
+*.avr
