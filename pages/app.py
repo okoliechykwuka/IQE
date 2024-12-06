@@ -2,7 +2,7 @@
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
+import openai
 import streamlit as st
 from io import BytesIO
 from markdown_pdf import MarkdownPdf, Section
@@ -221,7 +221,7 @@ class CourseEvaluatorApp:
             5. **Summarized Results**: 
               - At the end, you will receive a summary with ratings and actionable insights.
             6. ** Suggestions**:
-              Based on the evaluation, I will provide actionable insights and suggestions
+              - Based on the evaluation, I will provide actionable insights and suggestions
             7. **Downlaodable Report**:
               - You can download the report for further analysis or sharing.
             
@@ -285,7 +285,12 @@ class CourseEvaluatorApp:
         
             st.session_state['content'] = content
 
-        
+            if len(st.session_state['content']['raw_text']) >= 900000:
+                st.warning("Content is Large for system to process")
+        else:
+            if not uploaded_file:
+                del st.session_state['content']
+
 
         if 'design_evaluator' not in st.session_state:
             with st.spinner("Building Evaluator Models"):
@@ -332,7 +337,6 @@ class CourseEvaluatorApp:
                 st.chat_message('ai').write(message.content)
 
         
-        
         if user_input:= st.chat_input():
             st.chat_message('human').write(user_input)
            
@@ -348,13 +352,13 @@ class CourseEvaluatorApp:
                     updated_state = snapshot.values
                     graph.update_state(config, updated_state)
                     res = graph.invoke({'proceed':True}, config)
-                    eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
+                    # eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
 
-                    if st.session_state['report_status'] and eval_summary:
-                        eval_content = eval_summary[0].content
-                        st.chat_message('ai').write(eval_content)
-                    else:
-                        st.chat_message('ai').write(res['messages'][-1].content)
+                    # if st.session_state['report_status'] and eval_summary:
+                    #     eval_content = eval_summary[0].content
+                    #     st.chat_message('ai').write(eval_content)
+                    # else:
+                    st.chat_message('ai').write(res['messages'][-1].content)
                 
                 else:
                     break
@@ -379,4 +383,8 @@ if __name__ == "__main__":
     else:
         print("Knowledge Base Detected")
     # app.setup_streamlit()
-    app.main()
+    try:
+        app.main()
+    except openai.BadRequestError as err:
+        if err.status_code == 400:
+            st.error("Oops! System Could not process the content\n The content you provided is too large or the model ran out memory space")

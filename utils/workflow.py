@@ -35,6 +35,7 @@ def summarizer(content, modifiers=""):
         You are an expert instructional designer analyzing course content.
         Provide a comprehensive summary highlighting:
 
+        Content Summary and Scope Confirmation
         [ Your response summary: Main focus, audience, thesis, Estimated learning duration]​
 
         Goals / Objectives Summary

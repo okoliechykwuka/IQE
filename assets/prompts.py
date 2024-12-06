@@ -40,6 +40,7 @@ Follow these steps during the evaluation:
     **4.1: PERFORM/ MAN Frameworks**
         Here are the final round's frameworks for PERFORMANCE MANAGEMENT.  
         This round also has 3 frameworks with a focus on how the course assists with the cycle of setting expectations, monitoring progress, providing feedback, and developing employee capabilities.  
+    
 
 **Step 5.1: Synthesis & Summary**
     - Great! You've finally evaluated the courses against all available framework, it's now time to put everything together and present the user with summary of your findings
@@ -121,7 +122,8 @@ Follow these steps during the evaluation:
 - Inform the user of the models you will be using for evaluation in each framework before proceeding to the actual evaluation
         e.g
             * Description: Description of the model
-- After gathering the evaluation results inform the user on all the models you have evaluated the content on
+- After gathering the evaluation results use the `synthesize_evalaution_summary` tool to summarize all your findings
+- Wait till step 5.1 before you show any score
 
 **Step 5.1: Synthesis & Summary**
     - In this step, You will need to provide a robust summary on the evaluations
@@ -538,7 +540,21 @@ Your task is to provide a detailed and structured summary of the evaluation in t
 
 ### **Instructions**:  
 
-#### **1. Dimension Summary**
+---
+
+#### **1. Model Scores and Summary**
+- Aggregate and summarize scores for the content evaluation across the **three frameworks**:
+  - **Design Models**: Dick and Carey, SAM, Shackleton 5Di, etc.
+  - **Transfer & Work Application Models**: The Decisive Dozen, Action Mapping, UbD, etc.
+  - **Performance Management Models**: Mager and Pipe, Behavior Engineering Model, ADDIE, etc.
+- For each model:
+  - Assign a **score (0-100)**, representing the degree of alignment of the content with the model's principles.
+  - Provide a **concise explanation for the score**.
+- Present the scores in a **table format**
+- Use html table styling for consitency as shown below:  
+---
+
+#### **2. Dimension Summary**
 - Evaluate the learning content based on the **17 dimensions** listed below, considering insights from all models used in the evaluation process.
         1. Engagement: Drives active participation and sustained learner motivation  
 
@@ -576,21 +592,13 @@ Your task is to provide a detailed and structured summary of the evaluation in t
 
 - For each dimension:
   - Give an explanation on alignment of the content with the dimension.
+  - Give a score (weight) between 1 and 10 on the alignment of the content with the dimension
+        where 0 = Low Attainment - The desired outcome is absent or not achieved.  
+                10 = High Attainment - The outcome surpasses expectations, demonstrating expert skill, creativity, and a deep understanding.
+
 - Present this summary in a **table format** as follows:  
 
----
 
-#### **2. Model Scores and Summary**
-- Aggregate and summarize scores for the content evaluation across the **three frameworks**:
-  - **Design Models**: Dick and Carey, SAM, Shackleton 5Di, etc.
-  - **Transfer & Work Application Models**: The Decisive Dozen, Action Mapping, UbD, etc.
-  - **Performance Management Models**: Mager and Pipe, Behavior Engineering Model, ADDIE, etc.
-- For each model:
-  - Assign a **score (0-100)**, representing the degree of alignment of the content with the model's principles.
-  - Provide a **concise explanation for the score**.
-- Present the scores in a **table format**
-- Use html table styling for consitency as shown below:  
----
 
 #### **3. Final Quality Index**
 - **Calculate a single composite score (0-100)** to represent the overall quality of the learning content.  
@@ -603,26 +611,7 @@ Your task is to provide a detailed and structured summary of the evaluation in t
 
 ### **Final Output**:  
 
-#### Course Title
-Course Description
-
-1. **Dimension Summary Table**  
-
-<table>
-    <tr>
-        <th>Dimension</th>
-        <th>Explanation</th>
-    </tr>
-    <tr>
-        <td>Dimension Value</td>
-        <td>Explanation Value</td>
-    </tr>
-</table>
-
-
-
-
-2. **Model Scores and Summary Table**  
+1. **Model Scores and Summary**  
 <table>
   <thead>
     <tr>
@@ -689,19 +678,35 @@ Course Description
   </tbody>
 </table>
 
+2. **Dimension Summary**  
 
+<table>
+    <tr>
+        <th>Dimension</th>
+        <th>Explanation</th>
+        <th>Weight</th>
+    </tr>
+    <tr>
+        <td>Dimension Value</td>
+        <td>Explanation Value</td>
+        <td>Weight Value</td>
+    </tr>
+</table>
+
+**Add this as an end note of the dimension summary**:
+Quality of Attainment Scoring: 
+0 = Low Attainment - The desired outcome is absent or not achieved.  
+10 = High Attainment - The outcome surpasses expectations, demonstrating expert skill, creativity, and a deep understanding.
 
 3. **Final Quality Index**  
-**Score (0-100)**: [calculated composite score]  
+**Score**: [calculated composite score] 
+
 
 Break your sentnences into new lines to be able to wrap them in the table cells
 ---
 
 ### **Explanatory Notes**:  
 - Key insights from the evaluation.  
-- Patterns or trends observed.  
-- Recommendations for improvement.  
-
 ---
 
 ### **Context**:
