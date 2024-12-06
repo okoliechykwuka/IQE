@@ -16,13 +16,13 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver
 import sqlite3
 from typing import Dict, Any, Annotated
-from assets.prompts import SYSTEM_PROMPT, summary_synthesis_prompt
+from assets.prompts import SYSTEM_PROMPT, SUMMARY_SYNTHESIS_PROMPT
 from utils.evaluator import Tools
 
 
 load_dotenv(find_dotenv())
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 
 # Define all the chains
@@ -45,7 +45,11 @@ def summarizer(content, modifiers=""):
 
          
         - Present the summary to the user for confirmation.
-        - If the user provides feedback or requests adjustments, refine the summary accordingly.
+        Ask the users some follow up questions like:
+            - Did I reasonably capture the intention and goal of your course?
+            - Are there specific areas of Instructional Quality you feel I should focus on?
+            - Are there any changes you could envision (add, remove, modify…) that could incorporate into my evaluation and response?
+        - If the user provides feedback or requests adjustments, refine the summary accordingly.'
          
          Content Type: {content_type}
          Content: "{content}
@@ -62,7 +66,7 @@ def summarizer(content, modifiers=""):
 def evaluation_summarizer(state):
     messages = state['messages']
     summary_llm  = ChatOpenAI(model="gpt-4o-mini", temperature=0.5)
-    summary_prompt = PromptTemplate.from_template(summary_synthesis_prompt)
+    summary_prompt = PromptTemplate.from_template(SUMMARY_SYNTHESIS_PROMPT)
     summary_chain = summary_prompt | summary_llm
     eval_summary = summary_chain.invoke(messages)
     

@@ -130,7 +130,7 @@ Follow these steps during the evaluation:
     - Confirm from the user before proceeding to the evaluation summary step
 
 **Step 6.1: Suggestions**
-    - Provide the user with actionable suggestions based on your evaluation of the course course, and related findings from the frameworks.
+    - In this step, you will provide the user with actionable suggestions based on your evaluation of the course course, and related findings from the frameworks.
 
 **Step 7.1 Wrap Up:
     it's time to wrap up. This should be an end note. Inform the user they have now reached the end of the evaluatation and their report is available for download
@@ -411,7 +411,7 @@ Provide suggestions to enhance the systematic design and delivery of the content
 
 """
 
-summary_synthesis_prompt = """
+summary_synthesis_prompt_V1 = """
 
 **Synthesis and Summary Prompt**
 
@@ -481,8 +481,6 @@ Your task is to provide a detailed and structured summary of the evaluation in t
   - Averaging the scores from the **Model Scores and Summary**.
   - Combining these averages with equal weight to compute the **Final Quality Index**.  
 
-- Present this as a separate section:  
-  **Final Quality Index**: [calculated score (0-100)]  
 
 ---
 
@@ -496,18 +494,207 @@ Your task is to provide a detailed and structured summary of the evaluation in t
 | ...                   |                                                      |
 
 2. **Model Scores and Summary Table**  
-| **Framework**             | **Model**              | **Score (0-100)** | **Explanation**                               |
-|---------------------------|------------------------|-------------------|-----------------------------------------------|
-| Design                    | Dick and Carey         |                   |                                               |
-|                           | SAM                    |                   |                                               |
-| Transfer & Work Application | The Decisive Dozen   |                   |                                               |
-|                           | Action Mapping         |                   |                                               |
-| Performance Management    | Mager and Pipe Model   |                   |                                               |
-|                           | Behavior Engineering   |                   |                                               |
+| **Framework**               | **Model**              | **Score (0-100)** | **Explanation**                               |
+|-----------------------------|------------------------|-------------------|-----------------------------------------------|
+| Design                      | Dick and Carey         |                   |                                               |
+|                             | SAM                    |                   |                                               |
+| Transfer & Work Application | The Decisive Dozen     |                   |                                               |
+|                             | Action Mapping         |                   |                                               |
+| Performance Management      | Mager and Pipe Model   |                   |                                               |
+|                             | Behavior Engineering   |                   |                                               |
 
 3. **Final Quality Index**  
 **Score (0-100)**: [calculated composite score]  
 
+Break your sentnences into new lines to be able to wrap them in the table cells
+---
+
+### **Explanatory Notes**:  
+- Key insights from the evaluation.  
+- Patterns or trends observed.  
+- Recommendations for improvement.  
+
+---
+
+### **Context**:
+The content evaluation is based on the detailed assessments provided earlier using the following frameworks:  
+1. **Design Models**  
+2. **Transfer & Work Application Models**  
+3. **Performance Management Models**  
+
+### **Content Evaluation History to Summarize**:  
+{content_to_analyze}  
+
+---
+"""
+SUMMARY_SYNTHESIS_PROMPT = """
+
+**Synthesis and Summary Prompt**
+
+You are an expert evaluator synthesizing and summarizing a comprehensive course evaluation across multiple models and dimensions. 
+Your task is to provide a detailed and structured summary of the evaluation in three segments: **Dimension Summary**, **Model Scores and Summary**, and a **Final Quality Index** for the content.
+
+---
+
+### **Instructions**:  
+
+#### **1. Dimension Summary**
+- Evaluate the learning content based on the **17 dimensions** listed below, considering insights from all models used in the evaluation process.
+        1. Engagement: Drives active participation and sustained learner motivation  
+
+        2. Interactivity: Real-time practice, simulation, and collaborative learning  
+
+        3. Accessibility: Ensures inclusive learning for all abilities and situations  
+
+        4. Visual Design: Clean, professional aesthetics supporting learning  
+
+        5. Reliability: Consistent quality across all content elements  
+
+        6. Innovation: Modern, tech-enabled approaches to skill development  
+
+        7. Actionability: Directly applicable to job tasks and performance improvement  
+
+        8. Feedback & Assessment: Clear metrics and timely feedback for learning validation  
+
+        9. Learner Support: Resources and tools enabling successful completion  
+
+        10. Structure: Logical flow with clear learning pathways  
+
+        11. Topicality: Current, relevant, and aligned with industry needs  
+
+        12. Cultural Inclusivity: Respects and reflects diverse perspectives  
+
+        13. Suitability: Appropriate language and tone for target audience  
+
+        14. Format Variety: Multiple learning modalities and delivery options  
+
+        15. Authoritativeness: Evidence-based content from verified expert sources  
+
+        16. Objectivity: Balanced presentation without commercial bias  
+
+        17. Findability: Easy content location and navigation
+
+- For each dimension:
+  - Give an explanation on alignment of the content with the dimension.
+- Present this summary in a **table format** as follows:  
+
+---
+
+#### **2. Model Scores and Summary**
+- Aggregate and summarize scores for the content evaluation across the **three frameworks**:
+  - **Design Models**: Dick and Carey, SAM, Shackleton 5Di, etc.
+  - **Transfer & Work Application Models**: The Decisive Dozen, Action Mapping, UbD, etc.
+  - **Performance Management Models**: Mager and Pipe, Behavior Engineering Model, ADDIE, etc.
+- For each model:
+  - Assign a **score (0-100)**, representing the degree of alignment of the content with the model's principles.
+  - Provide a **concise explanation for the score**.
+- Present the scores in a **table format**
+- Use html table styling for consitency as shown below:  
+---
+
+#### **3. Final Quality Index**
+- **Calculate a single composite score (0-100)** to represent the overall quality of the learning content.  
+- The score should be calculated by:
+  - Averaging the scores from the **Model Scores and Summary**.
+  - Combining these averages with equal weight to compute the **Final Quality Index**.  
+
+
+---
+
+### **Final Output**:  
+
+#### Course Title
+Course Description
+
+1. **Dimension Summary Table**  
+
+<table>
+    <tr>
+        <th>Dimension</th>
+        <th>Explanation</th>
+    </tr>
+    <tr>
+        <td>Dimension Value</td>
+        <td>Explanation Value</td>
+    </tr>
+</table>
+
+
+
+
+2. **Model Scores and Summary Table**  
+<table>
+  <thead>
+    <tr>
+      <th>Framework</th>
+      <th>Model</th>
+      <th>Score (0-100)</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4">Design</td>
+      <td>Dick and Carey</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>SAM</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Shackleton 5Di Model</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Learning Arches and Learning Spaces</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowspan="3">Transfer & Work Application</td>
+      <td>The Decisive Dozen</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Action Mapping</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Wiggins and McTighe Backwards Design Model</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowspan="3">Performance Management</td>
+      <td>Mager and Pipe Model</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Behavior Engineering</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ADDIE</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+3. **Final Quality Index**  
+**Score (0-100)**: [calculated composite score]  
+
+Break your sentnences into new lines to be able to wrap them in the table cells
 ---
 
 ### **Explanatory Notes**:  

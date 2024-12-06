@@ -211,14 +211,21 @@ class CourseEvaluatorApp:
             ### How to Use:
             1. **Attach Course Files**: 
             - Upload the course files you want evaluated (PDFs, YouTube links, or audio files).
-            2. **Verification and Preferences**: 
-            - I will verify the course structure and categories, and confirm the level of critique you prefer.
-            3. **Evaluation Frameworks**: 
-            - I will evaluate your course using various proven frameworks.
-            4. **Summarized Results**: 
-            - At the end, you will receive a summary with ratings and actionable insights.
-            5. **Downlaodable Report**:
-            - You can download the report for further analysis or sharing.
+            - If you provided a YouTube link , click Enter to apply
+            2. **Summary and Confirmation**: 
+                - I will verify the course structure and categories, and confirm the level of critique you prefer.
+            3. **Critque Level**
+                - Provide a critique level: (0 - 10)
+            4. **Evaluation Frameworks**: 
+               - I will evaluate your course using various proven frameworks.
+            5. **Summarized Results**: 
+              - At the end, you will receive a summary with ratings and actionable insights.
+            6. ** Suggestions**:
+              Based on the evaluation, I will provide actionable insights and suggestions
+            7. **Downlaodable Report**:
+              - You can download the report for further analysis or sharing.
+            
+            **Note**: The system may ocassionally jump a step, if you need to go through that step, you can remind the model to go back to the step
             """
         )
         # Custom CSS to modify sidebar and page layout
@@ -249,30 +256,6 @@ class CourseEvaluatorApp:
                 """
             )
 
-
-            
-            # Create columns for prompts
-            col1, col2, col3, col4 = st.columns(4)
-
-            
-
-            with col1:
-                st.button("Evaluate a sales course")
-                    # st.session_state["starter_prompt"] = "Evaluate a sales course"
-                    
-
-            with col2:
-                st.button("Assess onboarding material")
-                    # st.session_state["starter_prompt"] = "Assess onboarding material"
-
-
-            with col3:
-                st.button("Review compliance training")
-                    # st.session_state["starter_prompt"] = "Review compliance training"
-
-            with col4:
-                st.button("Analyze leadership workshop")
-                    # st.session_state["starter_prompt"] = "Analyze leadership workshop"
         else:
             with st.columns(1)[0]:
                 st.markdown(
@@ -288,11 +271,6 @@ class CourseEvaluatorApp:
             if uploaded_file:
                 st.success(f"File '{uploaded_file.name}' uploaded successfully!")
                 content = self.process_file(uploaded_file)
-
-                # st.write("Please confirm if this summary capture the scope of the course? or provide additional information to modify")
-                # st.write("- Are there specific areas of instructional quality you’d like me to focus on?")
-                # st.write("- Are there any changes you envision to improve the course evaluation?")
-                # user_feedback = st.text_area("Your feedback (optional):", placeholder="Enter your feedback here...")
 
             elif youtube_url:
                 if "youtube.com" not in youtube_url and "youtu.be" not in youtube_url:
@@ -321,7 +299,7 @@ class CourseEvaluatorApp:
             
 
         if "content_summary" in st.session_state:
-            print("GOT HERE")
+            # print("GOT HERE")
             st.subheader("Extracted Content Summary")
                
         else:
@@ -370,16 +348,24 @@ class CourseEvaluatorApp:
                     updated_state = snapshot.values
                     graph.update_state(config, updated_state)
                     res = graph.invoke({'proceed':True}, config)
-                
-                    st.chat_message('ai').write(res['messages'][-1].content)
+                    eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
+
+                    if st.session_state['report_status'] and eval_summary:
+                        eval_content = eval_summary[0].content
+                        st.chat_message('ai').write(eval_content)
+                    else:
+                        st.chat_message('ai').write(res['messages'][-1].content)
                 
                 else:
                     break
         if st.session_state['report_status']:
             # snapshot = graph.get_state(config)
-            # content = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))[0].content
-            #self.save_to_pdf(st.session_state['report'])
-            st.download_button("Download Evaluation PDF", data=st.session_state['report'], file_name="Evaluation_Summary_Report.pdf", mime="application/pdf")
+            try:
+                content = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))[0].content
+                report_buffer = self.save_to_pdf(content)
+                st.download_button("Download Evaluation PDF", data=report_buffer, file_name="Evaluation_Summary_Report.pdf", mime="application/pdf")
+            except IndexError:
+                st.download_button("Download Evaluation PDF", data=st.session_state['report'], file_name="Evaluation_Summary_Report.pdf", mime="application/pdf")
             st.session_state['report_status']  = False
 
                 
