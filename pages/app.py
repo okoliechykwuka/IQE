@@ -352,13 +352,13 @@ class CourseEvaluatorApp:
                     updated_state = snapshot.values
                     graph.update_state(config, updated_state)
                     res = graph.invoke({'proceed':True}, config)
-                    # eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
+                    eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
 
-                    # if st.session_state['report_status'] and eval_summary:
-                    #     eval_content = eval_summary[0].content
-                    #     st.chat_message('ai').write(eval_content)
-                    # else:
-                    st.chat_message('ai').write(res['messages'][-1].content)
+                    if st.session_state['report_status'] and eval_summary:
+                        eval_content = eval_summary[0].content
+                        st.chat_message('ai').write(eval_content)
+                    else:
+                        st.chat_message('ai').write(res['messages'][-1].content)
                 
                 else:
                     break
