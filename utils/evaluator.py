@@ -209,7 +209,7 @@ class Tools():
         """Use this tool to carry out evaluation using the PERFORM/ MAN Frameworks. Input to this tool is the critique level"""
     @tool
     def synthesize_evalaution_summary():
-        """Use this tool to carry out the final summary synthesis of the content evaluations. The tool aggregates content evaluations across the various instructional design frameworks, summarizing scores for key dimensions and models."""
+        """Use this tool to carry out Step 5.1, the final summary synthesis of the content evaluations. The tool aggregates content evaluations across the various instructional design frameworks, summarizing scores for key dimensions and models."""
 
     @tool
     def generate_downloadable_report(report_statements: str):
