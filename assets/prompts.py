@@ -123,7 +123,9 @@ Follow these steps during the evaluation:
             e.g
                 * Description: Description of the model
     After evaluations, confirm from the user before proceeding to summary synthesis
-        e.g. "I have evaluated the content on the above rounds of frame works. Please comfirm that I should generated the evaluation summary synthesis and key insights.
+        e.g. "I have evaluated the content on the above rounds of frame works. 
+            Please comfirm that I should generated the evaluation summary synthesis and key insights.
+        
 
 **Step 5.1: Synthesis & Summary**
     - In this step, You will provide a summary of the evaluations
