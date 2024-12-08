@@ -203,7 +203,8 @@ class CourseEvaluatorApp:
         st.sidebar.title("Upload Your Course Materials")
         uploaded_file = st.sidebar.file_uploader("Upload your course materials:", type=["pdf", "mp3", "mp4"])
         youtube_url = st.sidebar.text_input("Or provide a YouTube URL")
-
+        if 'youtube_url' not in st.session_state:
+            st.session_state['youtube_url'] = youtube_url
         # Sidebar: Instructions
         st.sidebar.title("Instructions")
         st.sidebar.markdown(
@@ -288,7 +289,7 @@ class CourseEvaluatorApp:
             if len(st.session_state['content']['raw_text']) >= 900000:
                 st.warning("Content is Large for system to process")
         else:
-            if not uploaded_file:
+            if not (uploaded_file or st.session_state['youtube_url']):
                 del st.session_state['content']
 
 
@@ -334,7 +335,7 @@ class CourseEvaluatorApp:
             if isinstance(message, HumanMessage):
                 st.chat_message('human').write(message.content)
             elif isinstance(message, AIMessage):
-                st.chat_message('ai').write(message.content)
+                st.chat_message('ai').write(message.content, unsafe_allow_html=True)
 
         
         if user_input:= st.chat_input():
@@ -342,7 +343,7 @@ class CourseEvaluatorApp:
            
             res = graph.invoke({'messages':[user_input]}, config)
             
-            st.chat_message('ai').write(res['messages'][-1].content)
+            st.chat_message('ai').write(res['messages'][-1].content, unsafe_allow_html=True)
             
             while True:
                 snapshot = graph.get_state(config)
@@ -354,11 +355,11 @@ class CourseEvaluatorApp:
                     res = graph.invoke({'proceed':True}, config)
                     eval_summary = list(filter(lambda msg: msg.name == 'synthesize_evalaution_summary', snapshot.values['messages']))
 
-                    if st.session_state['report_status'] and eval_summary:
-                        eval_content = eval_summary[0].content
-                        st.chat_message('ai').write(eval_content)
-                    else:
-                        st.chat_message('ai').write(res['messages'][-1].content)
+                    # if st.session_state['report_status'] and eval_summary:
+                    #     eval_content = eval_summary[0].content
+                    #     st.chat_message('ai').write(eval_content)
+                    # else:
+                    st.chat_message('ai').markdown(res['messages'][-1].content, unsafe_allow_html=True)
                 
                 else:
                     break

@@ -119,17 +119,18 @@ Follow these steps during the evaluation:
             2. Behavior Engineering Model  
             3. ADDIE  
 
-- Inform the user of the models you will be using for evaluation in each framework before proceeding to the actual evaluation
-        e.g
-            * Description: Description of the model
-- Confirm from the user before displaying the result
-- Use the `synthesize_evalaution_summary` tool to summarize all your findings
+    - Inform the user of the models you will be using for evaluation in each framework and confirm from the user before proceeding to the actual evaluation
+            e.g
+                * Description: Description of the model
+    After evaluations, confirm from the user before proceeding to summary synthesis
+        e.g. "I have evaluated the content on the above rounds of frame works. Please comfirm that I should generated the evaluation summary synthesis and key insights.
 
 **Step 5.1: Synthesis & Summary**
-    - In this step, You will need to provide a robust summary on the evaluations
-    - You are expected to also provided an overall quality index score of the course content
+    - In this step, You will provide a summary of the evaluations
+    - Before proceeding with this step, make sure to confirm from the user if they want to proceed
     - use the `synthesize_evalaution_summary` tool to generate the detailed summary.
     - The summary should be presented in a table (html style)
+    After displaying the sumamary, ask the user if they will like suggestions or not
 
 **Step 6.1: Suggestions**
     - In this step, you will provide the user with actionable suggestions based on your evaluation of the course course, and related findings from the frameworks.
@@ -144,11 +145,12 @@ Follow these steps during the evaluation:
 - Stay concise and clear: Avoid overwhelming the user with excessive technical details unless they request it.
 
 ### User Interaction Expectations:
-- Always confirm actions or outputs with the user before proceeding to the next step.
+- **Always confirm actions or outputs with the user before proceeding to the next step**.
 - If the user provides partial or unclear inputs, ask follow-up questions to gather necessary details.
 - Allow the user to revisit previous steps or change evaluation depth at any point during the process.
 
 Act as a reliable and professional assistant, ensuring the user feels supported and confident in your evaluation of their learning content.
+Remember to always wait for confirmation before proceeding to the next step.
 """
 
 WELCOME_MSG = "Hi, Welcome to AI Learning Content Evaluation. Please provide a learning resource you want to evaluate"
@@ -705,8 +707,8 @@ Quality of Attainment Scoring:
 Break your sentnences into new lines to be able to wrap them in the table cells
 ---
 
-### **Explanatory Notes**:  
-- Key insights from the evaluation.  
+### **Key insights**
+Key insights from the evaluation.  
 ---
 
 ### **Context**:
