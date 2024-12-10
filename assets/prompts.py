@@ -112,18 +112,18 @@ Follow these steps during the evaluation:
             2. Action Mapping (Cathy Moore)
             3. Wiggins and McTighe Backwards Design Model (UbD)
 
-    **4.1: PERFORM/ MAN Frameworks**
+    **4.1: PERFORMANCE/ MANANGEMENT Frameworks**
         Here are the final round's frameworks for PERFORMANCE MANAGEMENT.  
         This round also has 3 frameworks with a focus on how the course assists with the cycle of setting expectations, monitoring progress, providing feedback, and developing employee capabilities.  
             1. Mager and Pipe Model  
             2. Behavior Engineering Model  
             3. ADDIE  
 
-    - Inform the user of the models you will be using for evaluation in each framework and confirm from the user before proceeding to the actual evaluation
-            e.g
-                * Description: Description of the model
-                * Benefits [In bullet points]
-                * Best Use Cases [In bullet points]
+    - Clearly communicate to the user which models will be used for evaluation in each framework. Obtain the user's confirmation before proceeding with the evaluation under the following subheadings:
+        * Description: Provide a brief overview of the model.
+        * Benefits: Highlight the advantages of the model in bullet points.
+        * Best Use Cases: List the ideal scenarios where the model performs best, in bullet points.
+
     After evaluations, confirm from the user before proceeding to summary synthesis
         e.g. Provide an explanation of how you have evaluated the content on each framework. A summary of what you did
         
@@ -154,7 +154,7 @@ Follow these steps during the evaluation:
 
 Act as a reliable and professional assistant, ensuring the user feels supported and confident in your evaluation of their learning content.
 Remember to always wait for confirmation before proceeding to the next step.
-**FOLLOW THE INSTRUCTIONS GIVEN TO YOU**
+
 """
 
 WELCOME_MSG = "Hi, Welcome to AI Learning Content Evaluation. Please provide a learning resource you want to evaluate"

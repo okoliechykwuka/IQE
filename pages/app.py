@@ -96,7 +96,7 @@ class CourseEvaluatorApp:
 
                 elif tool_call['name'] == 'transer_work_frameworks':
                     transfer = st.session_state['transfer_evaluator']
-                    with st.spinner("Evaluating Transfer Frameworks"):
+                    with st.spinner("Evaluating Transfer Work Frameworks"):
                         
                         critique = tool_call['args']
                         transfer.set_critique(**critique)
@@ -109,7 +109,7 @@ class CourseEvaluatorApp:
                  
                 elif tool_call['name'] == 'perform_man_frameworks':
                     performance = st.session_state['performance_evaluator']
-                    with st.spinner("Evaluation Perform Man Frameworks"):
+                    with st.spinner("Evaluation Performance and Management Frameworks"):
                         critique = tool_call['args']
                         performance.set_critique(**critique)
                         performance_eval = performance.eval_performance() 
@@ -323,7 +323,7 @@ class CourseEvaluatorApp:
             try:
                 with st.spinner("Detecting Content Scope"):
                     summary = summarizer.summarize()
-                    print(summary)
+                    # print(summary)
                     st.session_state["content_summary"] = summary
                     st.subheader("Extracted Content Summary")
             except Exception as err:
