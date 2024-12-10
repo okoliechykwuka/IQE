@@ -9,7 +9,7 @@ from markdown_pdf import MarkdownPdf, Section
 import os
 from utils.processors import PDFProcessor, VideoProcessor, AudioProcessor, DummyProcessor
 from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator, load_chromadb
-from utils.workflow import summarizer, workflow_builder, evaluation_summarizer
+from utils.workflow import workflow_builder, evaluation_summarizer, ContentSummarizer
 from assets.prompts import SYSTEM_PROMPT, DESIGN_BASE_PROMPT, TRANSFER_BASE_PROMPT, PERFORMANCE_BASE_PROMPT
 from assets.evalresources import transfer_resources, design_resources, performance_resources
 
@@ -148,7 +148,11 @@ class CourseEvaluatorApp:
                     print("Generating Scope")
                     # st.session_state["content_summary"] = None
                     additions = tool_call['args']['info']
-                    summary = summarizer(st.session_state.get('content',''))
+                    summarizer = st.session_state.get('summarizer', None) 
+                    if summarizer is not None:
+                        summary = summarizer.summarize(modifiers = additions)
+                    else:
+                        summary = {'summary': 'Summarizer is not found'}
 
                     st.session_state["content_summary"] = summary
                     outbound_msgs.append(ToolMessage(
@@ -272,6 +276,8 @@ class CourseEvaluatorApp:
             if uploaded_file:
                 st.success(f"File '{uploaded_file.name}' uploaded successfully!")
                 content = self.process_file(uploaded_file)
+                if content is None:
+                    st.stop()
 
             elif youtube_url:
                 if "youtube.com" not in youtube_url and "youtu.be" not in youtube_url:
@@ -279,18 +285,23 @@ class CourseEvaluatorApp:
                 else:
                     with st.spinner("Extracting transcript from YouTube..."):
                         content = self.video_processor.process(youtube_url)
-                        st.success("YouTube content successfully extracted!")
+                        if content is not None:
+                            st.success("YouTube content successfully extracted!")
+                        else:
+                            st.stop()
             else:
                 st.sidebar.info("Please upload your course materials here or Provide a YouTube link to your course")
                 st.stop()
         
             st.session_state['content'] = content
+            summarizer = ContentSummarizer(content)
+            st.session_state['summarizer'] = summarizer
 
             if len(st.session_state['content']['raw_text']) >= 900000:
                 st.warning("Content is Large for system to process")
-        else:
-            if not (uploaded_file or st.session_state['youtube_url']):
-                del st.session_state['content']
+        # else:
+        #     if not (uploaded_file or st.session_state['youtube_url']):
+        #         del st.session_state['content']
 
 
         if 'design_evaluator' not in st.session_state:
@@ -309,33 +320,41 @@ class CourseEvaluatorApp:
             st.subheader("Extracted Content Summary")
                
         else:
-            
-            with st.spinner("Detecting Content Scope"):
-                summary = summarizer(st.session_state['content'])
-                st.session_state["content_summary"] = summary
-                st.subheader("Extracted Content Summary")
+            try:
+                with st.spinner("Detecting Content Scope"):
+                    summary = summarizer.summarize()
+                    print(summary)
+                    st.session_state["content_summary"] = summary
+                    st.subheader("Extracted Content Summary")
+            except Exception as err:
+                st.error("Error occured while extracting summary. Please contact admin")
+                st.stop()
                 
 
-                ## Make the agent aware of the summary
-                snapshot = graph.get_state(config)
-                
-                if 'messages' not in snapshot.values:
-                    snapshot.values['messages'] = []
-                    snapshot.values['messages'].append((SystemMessage(content=SYSTEM_PROMPT)))
-                    snapshot.values['messages'].append((AIMessage(content=summary['summary'])))
-                    # Update the graph state
-                    new_messages =  snapshot.values
-                    graph.update_state(config, new_messages)
+            ## Make the agent aware of the summary
+            snapshot = graph.get_state(config)
+            # print("GOT HERE")
+            if 'messages' not in snapshot.values:
+                snapshot.values['messages'] = []
+                snapshot.values['messages'].append((SystemMessage(content=SYSTEM_PROMPT)))
+                snapshot.values['messages'].append((AIMessage(content=summary['summary'])))
+                # Update the graph state
+                new_messages =  snapshot.values
+                graph.update_state(config, new_messages)
 
         snapshot = graph.get_state(config)
         # st.write(snapshot)
         
-       
-        for message in snapshot.values['messages']:
-            if isinstance(message, HumanMessage):
-                st.chat_message('human').write(message.content)
-            elif isinstance(message, AIMessage):
-                st.chat_message('ai').write(message.content, unsafe_allow_html=True)
+        
+        messages = snapshot.values.get('messages', [])
+        if messages:
+            for message in snapshot.values['messages']:
+                if isinstance(message, HumanMessage):
+                    st.chat_message('human').write(message.content)
+                elif isinstance(message, AIMessage):
+                    st.chat_message('ai').write(message.content, unsafe_allow_html=True)
+        else:
+            st.write('No messages found')
 
         
         if user_input:= st.chat_input():

@@ -18,8 +18,7 @@ class BaseProcessor:
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
-            chunk_overlap=200,
-            length_function=len
+            chunk_overlap=200
         )
     
     def chunk_content(self, text: str) -> List[str]:
@@ -39,7 +38,7 @@ class PDFProcessor(BaseProcessor):
                     st.write(total_pages)
                     progress_bar = st.progress(0)
                     for i, page in enumerate(reader.pages):
-                        text += "<Page {i+1}>}\n" + page.extract_text() + "\n\n"
+                        text += f"<Page {i+1}>\n" + page.extract_text() + "\n\n"
                         progress_bar.progress((i + 1) / total_pages)
                     
                     chunks = self.chunk_content(text)

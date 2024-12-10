@@ -122,9 +122,10 @@ Follow these steps during the evaluation:
     - Inform the user of the models you will be using for evaluation in each framework and confirm from the user before proceeding to the actual evaluation
             e.g
                 * Description: Description of the model
+                * Benefits [In bullet points]
+                * Best Use Cases [In bullet points]
     After evaluations, confirm from the user before proceeding to summary synthesis
-        e.g. "I have evaluated the content on the above rounds of frame works. 
-            Please comfirm that I should generated the evaluation summary synthesis and key insights.
+        e.g. Provide an explanation of how you have evaluated the content on each framework. A summary of what you did
         
 
 **Step 5.1: Synthesis & Summary**
@@ -153,6 +154,7 @@ Follow these steps during the evaluation:
 
 Act as a reliable and professional assistant, ensuring the user feels supported and confident in your evaluation of their learning content.
 Remember to always wait for confirmation before proceeding to the next step.
+**FOLLOW THE INSTRUCTIONS GIVEN TO YOU**
 """
 
 WELCOME_MSG = "Hi, Welcome to AI Learning Content Evaluation. Please provide a learning resource you want to evaluate"
