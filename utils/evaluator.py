@@ -85,6 +85,7 @@ class Evaluator(ABC):
                 break
 
     def evaluate_sliding(self, model_name):
+        st.info("Using Sliding Window Evaluator")
         context_summary = ""
         for chunk in self.sliding_window(self.content):
             content_eval_tmpl_str = LLamaPromptTemplate(self.sliding_prompt).partial_format(content=chunk, N=self.N, previous_summary=context_summary)

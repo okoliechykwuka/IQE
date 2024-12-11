@@ -11,11 +11,11 @@ from utils.processors import PDFProcessor, VideoProcessor, AudioProcessor, Dummy
 from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator
 from utils.workflow import workflow_builder, evaluation_summarizer, ContentSummarizer
 from assets.prompts import SYSTEM_PROMPT, GENERAL_EVAL_PROMPT, GENERAL_SLIDING_EVAL_PROMPT
-from assets.evalresources import transfer_resources, design_resources, performance_resources
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, ToolMessage
 st.session_state['report_status']  = False
-st.session_state['content_is_large'] = False
+if 'content_is_large' not in st.session_state:
+    st.session_state['content_is_large'] = False
 
 import uuid
 
@@ -259,7 +259,7 @@ class CourseEvaluatorApp:
         """, unsafe_allow_html=True)
 
         # Title at the top of the page
-        st.markdown('<h1 class="main-title">Instructional Quality Prototype (IQA)</h1>', unsafe_allow_html=True)
+        st.markdown('<h1 class="main-title">Instructional Quality Agent Prototype (IQA)</h1>', unsafe_allow_html=True)
 
         if "content_summary" not in st.session_state:
             st.markdown(
@@ -289,11 +289,11 @@ class CourseEvaluatorApp:
                 if content['content_type'] == 'pdf':
                     if content['metadata']['pages'] >= 20:
                         st.session_state['content_is_large'] = True
-                        st.warning("Content is Large for system to process")
+                        # st.warning("Content is Large for system to process")
                 else:
                    if content['metadata']['duration'] >= 1200: # 20 minutes
                         st.session_state['content_is_large'] = True
-                        st.warning("Content is Large for system to process")
+                        # st.warning("Content is Large for system to process")
 
                 if content is None:
                     st.stop()
@@ -308,7 +308,7 @@ class CourseEvaluatorApp:
                             st.success("YouTube content successfully extracted!")
                             if content['metadata']['duration'] >= 1200: # 20 minutes
                                 st.session_state['content_is_large'] = True
-                                st.warning("Content is Large for system to process")
+                                # st.warning("Content is Large for system to process")
                         else:
                             st.stop()
             else:
