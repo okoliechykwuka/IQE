@@ -1,6 +1,5 @@
-embedchain==0.1.125
+llama-index==0.12.5
 youtube-transcript-api
-embedchain[youtube]
 langchain==0.3.9
 langchain_community==0.3.9
 langchain_core==0.3.21

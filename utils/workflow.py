@@ -113,12 +113,15 @@ class ContentSummarizer:
 
     def summarize(self, modifiers=''):
         summary_prompt = self.get_prompts(modifiers)
-        if self.word_count < 152000:
+        if self.word_count < 100000:
+           
             self.summary_chain = load_summarize_chain(self.llm, prompt=summary_prompt,  chain_type="stuff")
+
         else:
+           
             self.summary_chain = load_summarize_chain(self.llm, chain_type='refine')
             self.summary_chain.initial_llm_chain.prompt = summary_prompt
-        
+
         summary = self.summary_chain.invoke(self.docs)
 
         return {'summary':summary['output_text']}

@@ -8,14 +8,14 @@ from io import BytesIO
 from markdown_pdf import MarkdownPdf, Section
 import os
 from utils.processors import PDFProcessor, VideoProcessor, AudioProcessor, DummyProcessor
-from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator, load_chromadb
+from utils.evaluator import DesignEvaluator, TransferEvaluator, PerformanceEvaluator
 from utils.workflow import workflow_builder, evaluation_summarizer, ContentSummarizer
-from assets.prompts import SYSTEM_PROMPT, DESIGN_BASE_PROMPT, TRANSFER_BASE_PROMPT, PERFORMANCE_BASE_PROMPT
+from assets.prompts import SYSTEM_PROMPT, GENERAL_EVAL_PROMPT, GENERAL_SLIDING_EVAL_PROMPT
 from assets.evalresources import transfer_resources, design_resources, performance_resources
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, ToolMessage
 st.session_state['report_status']  = False
-
+st.session_state['content_is_large'] = False
 
 import uuid
 
@@ -86,7 +86,10 @@ class CourseEvaluatorApp:
                     with st.spinner("Evaluating Design Frameworks"):
                         critique = tool_call['args']
                         design.set_critique(**critique)
-                        design_eval = design.eval_design()
+                        if st.session_state['content_is_large']:
+                            design_eval = design.eval_design(slide=True)
+                        else:
+                            design_eval = design.eval_design()
 
                         outbound_msgs.append(ToolMessage(
                             content= str(design_eval),
@@ -100,7 +103,10 @@ class CourseEvaluatorApp:
                         
                         critique = tool_call['args']
                         transfer.set_critique(**critique)
-                        tranaser_eval = transfer.eval_transfer() 
+                        if st.session_state['content_is_large']:
+                            tranaser_eval = transfer.eval_transfer(slide=True) 
+                        else:
+                            tranaser_eval = transfer.eval_transfer() 
                         outbound_msgs.append(ToolMessage(
                             content= str(tranaser_eval), 
                             name=tool_call['name'],
@@ -112,7 +118,10 @@ class CourseEvaluatorApp:
                     with st.spinner("Evaluation Performance and Management Frameworks"):
                         critique = tool_call['args']
                         performance.set_critique(**critique)
-                        performance_eval = performance.eval_performance() 
+                        if st.session_state['content_is_large']:
+                            performance_eval = performance.eval_performance(slide=True) 
+                        else:
+                            performance_eval = performance.eval_performance() 
                         outbound_msgs.append(ToolMessage(
                             content= str(performance_eval), 
                             name=tool_call['name'],
@@ -120,7 +129,7 @@ class CourseEvaluatorApp:
                         ))
 
                 elif tool_call['name'] == 'synthesize_evalaution_summary':
-                    print("Running summary TOOL")
+                    # print("Running summary TOOL")
                     with st.spinner("Running Evaluation Summary Synthesizer"):
                         eval_summary = evaluation_summarizer(state)
                         # st.markdown(eval_summary['summary'])
@@ -131,7 +140,7 @@ class CourseEvaluatorApp:
                         ))
 
                 elif tool_call['name'] == 'generate_downloadable_report':
-                    print("Generating Report")
+                    # print("Generating Report")
                     report_statements = tool_call['args']
                     st.session_state['report_status']  = True
                     report = self.save_to_pdf(**report_statements)
@@ -145,7 +154,7 @@ class CourseEvaluatorApp:
                     ))
 
                 elif tool_call['name'] == 'gen_scope':
-                    print("Generating Scope")
+                    # print("Generating Scope")
                     # st.session_state["content_summary"] = None
                     additions = tool_call['args']['info']
                     summarizer = st.session_state.get('summarizer', None) 
@@ -276,6 +285,16 @@ class CourseEvaluatorApp:
             if uploaded_file:
                 st.success(f"File '{uploaded_file.name}' uploaded successfully!")
                 content = self.process_file(uploaded_file)
+                
+                if content['content_type'] == 'pdf':
+                    if content['metadata']['pages'] >= 20:
+                        st.session_state['content_is_large'] = True
+                        st.warning("Content is Large for system to process")
+                else:
+                   if content['metadata']['duration'] >= 1200: # 20 minutes
+                        st.session_state['content_is_large'] = True
+                        st.warning("Content is Large for system to process")
+
                 if content is None:
                     st.stop()
 
@@ -287,6 +306,9 @@ class CourseEvaluatorApp:
                         content = self.video_processor.process(youtube_url)
                         if content is not None:
                             st.success("YouTube content successfully extracted!")
+                            if content['metadata']['duration'] >= 1200: # 20 minutes
+                                st.session_state['content_is_large'] = True
+                                st.warning("Content is Large for system to process")
                         else:
                             st.stop()
             else:
@@ -294,25 +316,25 @@ class CourseEvaluatorApp:
                 st.stop()
         
             st.session_state['content'] = content
+            # print(type(content))
             summarizer = ContentSummarizer(content)
             st.session_state['summarizer'] = summarizer
 
-            if len(st.session_state['content']['raw_text']) >= 900000:
-                st.warning("Content is Large for system to process")
         # else:
         #     if not (uploaded_file or st.session_state['youtube_url']):
         #         del st.session_state['content']
-
+        if st.session_state['content_is_large']:
+            st.warning("Content is Large for system to process")
 
         if 'design_evaluator' not in st.session_state:
             with st.spinner("Building Evaluator Models"):
-                design = DesignEvaluator(collection_name='design_framework', db_path="./db", prompt=DESIGN_BASE_PROMPT, content=content)
+                design = DesignEvaluator(prompt=GENERAL_EVAL_PROMPT, sprompt=GENERAL_SLIDING_EVAL_PROMPT, content=content)
                 st.session_state['design_evaluator'] = design
         if 'performance_evaluator' not in st.session_state:
-            st.session_state['performance_evaluator'] = PerformanceEvaluator(collection_name='performance_framework', db_path="./db", prompt=PERFORMANCE_BASE_PROMPT, content=content)
+            st.session_state['performance_evaluator'] = PerformanceEvaluator(prompt=GENERAL_EVAL_PROMPT, sprompt=GENERAL_SLIDING_EVAL_PROMPT, content=content)
 
         if 'transfer_evaluator' not in st.session_state:
-            st.session_state['transfer_evaluator'] = TransferEvaluator(collection_name='transfer_framework', db_path="./db", prompt=TRANSFER_BASE_PROMPT, content=content)
+            st.session_state['transfer_evaluator'] = TransferEvaluator(prompt=GENERAL_EVAL_PROMPT, sprompt=GENERAL_SLIDING_EVAL_PROMPT, content=content)
             
 
         if "content_summary" in st.session_state:
@@ -395,16 +417,12 @@ class CourseEvaluatorApp:
                 
 if __name__ == "__main__":
     app = CourseEvaluatorApp()
-    if not (os.path.exists("./IQE/db/chroma.sqlite3") or os.path.exists("./db/chroma.sqlite3")):
-        print("Setting Evaluation Knowledge Base")
-        load_chromadb(collection_name="design_framework", db_path="./db", resources=design_resources)
-        load_chromadb(collection_name="transfer_framework", db_path="./db", resources=transfer_resources)
-        load_chromadb(collection_name="performance_framework", db_path="./db", resources=performance_resources)
-    else:
-        print("Knowledge Base Detected")
-    # app.setup_streamlit()
     try:
         app.main()
     except openai.BadRequestError as err:
         if err.status_code == 400:
             st.error("Oops! System Could not process the content\n The content you provided is too large or the model ran out memory space")
+    except Exception as err:
+        st.write(f"Error occure {str(err)}. Please reload page")
+    # except Exception as err:
+    #     st.error(f"Error has occured {str(err)}")
