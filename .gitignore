@@ -13,6 +13,6 @@ test.ipynb
 requirements_original.txt
 /db/*
 *pdf
-*txt
+
 *.toml
 .streamlit

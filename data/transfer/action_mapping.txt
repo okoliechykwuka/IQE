@@ -1,0 +1,28 @@
+### Overview of the Core Principles and Philosophy of Action Mapping (Cathy Moore)
+Action Mapping is a visual and systematic approach to instructional design that focuses on aligning learning activities with specific business goals. Developed by Cathy Moore, this model emphasizes the importance of understanding the desired outcomes and the actions learners need to take to achieve those outcomes. The philosophy behind Action Mapping is to create effective learning experiences that are directly tied to real-world performance, ensuring that training is relevant and impactful.
+
+### Key Factors to Consider When Using the Model
+- **Business Goals**: Clearly define the business objectives that the training aims to support.
+- **Learner Actions**: Identify the specific actions learners need to perform to meet the business goals.
+- **Real-World Context**: Ensure that learning activities reflect real-life scenarios and challenges learners will face.
+- **Feedback Mechanisms**: Incorporate opportunities for learners to receive feedback on their performance.
+- **Simplicity and Clarity**: Keep the design straightforward to enhance understanding and retention.
+
+### Steps to Systematically Evaluate Learning Content with the Model
+1. **Identify Business Goals**: Start by determining the key business objectives that the training should address.
+2. **Define Learner Actions**: List the specific actions that learners must be able to perform to achieve the business goals.
+3. **Analyze Current Content**: Review existing learning materials to assess their alignment with the identified actions and goals.
+4. **Map Learning Activities**: Create a visual map that connects learner actions to relevant learning activities and assessments.
+5. **Gather Feedback**: Collect input from stakeholders and potential learners to refine the content and ensure it meets their needs.
+6. **Test and Iterate**: Implement the learning content, gather data on its effectiveness, and make necessary adjustments based on feedback and performance outcomes.
+
+### Clarifications on Common Misunderstandings
+- **Collaborative Process**: Action Mapping is a collaborative effort that involves clients and subject matter experts (SMEs) from the outset. Designers should not work in isolation; both parties should contribute to setting goals and identifying necessary learner actions.
+- **Needs Analysis**: The model includes a thorough needs analysis to ensure that training is part of the solution. It is not merely a method for organizing content but a comprehensive approach to understanding what learners need to do and why they may not be doing it.
+- **Corporate Focus**: Action Mapping is designed for the corporate environment, where measurable goals can be established, and observable behaviors can be analyzed. It is not intended for academic settings.
+- **Complexity of the Map**: The action map can become complex, reflecting the necessary details of learner actions and their sub-actions. It is not a simple diagram but a structured representation of dependencies linked directly to business goals.
+- **Purpose of the Map**: Unlike a mind map, which allows for casual additions, an action map requires that every element justifies its inclusion by linking back to the business goal, preventing unnecessary content from being added.
+
+### Additional Resources
+- **Scenario Design Toolkit**: A self-paced toolkit that guides users through designing scenarios on the job, complete with interactive tools for decision-making.
+- **Performance Consulting Skills**: The "Partner from the Start" toolkit helps instructional designers shift from being order takers to proactive problem solvers, focusing on identifying real issues and determining appropriate training solutions.

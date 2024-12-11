@@ -1,0 +1,76 @@
+### Overview of the Core Principles and Philosophy of SAM (Successive Approximation Model)
+
+The Successive Approximation Model (SAM) is an agile instructional design framework that emphasizes iterative development and continuous feedback. It is built on the philosophy that learning experiences can be refined through repeated cycles of design, development, and evaluation. SAM encourages collaboration among stakeholders and focuses on creating effective learning solutions that are responsive to learner needs and organizational goals.
+
+### Key Factors to Consider When Using the Model
+
+- **Iterative Process**: Embrace cycles of design, development, and evaluation rather than a linear approach.
+- **Stakeholder Involvement**: Engage learners, subject matter experts, and other stakeholders throughout the process.
+- **Rapid Prototyping**: Develop quick prototypes to test ideas and gather feedback early in the design process.
+- **Flexibility**: Be prepared to adapt and modify content based on feedback and changing requirements.
+- **Focus on Outcomes**: Prioritize learning objectives and desired outcomes to guide the design process.
+
+### Steps to Systematically Evaluate Learning Content with the Model
+
+1. **Define Learning Objectives**: Clearly articulate what learners should achieve by the end of the training.
+2. **Develop Prototypes**: Create initial versions of the learning content that can be easily modified.
+3. **Gather Feedback**: Collect input from stakeholders and potential learners on the prototypes.
+4. **Refine Content**: Use the feedback to make necessary adjustments and improvements to the content.
+5. **Conduct Usability Testing**: Test the revised content with a sample of the target audience to assess effectiveness and engagement.
+6. **Implement Changes**: Make final adjustments based on usability testing results before full deployment.
+7. **Evaluate Outcomes**: After implementation, assess whether the learning objectives were met and gather data for future iterations.
+
+### SAM Model vs. Traditional Instructional Design
+
+Traditional eLearning development models, such as ADDIE, focus on slowly perfecting a solution, resulting in long timelines that often span months. In contrast, SAM utilizes intermediate deadlines as incentives and encourages early testing of alternative solutions, fostering a culture of rapid iteration and innovation. This fluid approach allows for adaptability and responsiveness to feedback, making SAM more flexible than traditional processes. While ADDIE is a well-structured model, it can be time-consuming and may not meet the urgent demands for faster, more collaborative instructional design.
+
+### The Phases of the SAM
+
+1. **Preparation**: This phase involves gathering background information on learners, defining project goals, and brainstorming ideas collaboratively among stakeholders. Rapid prototypes or unpolished storyboards may emerge from this initial phase. Preparation work is done quickly, focusing on paths of least resistance to avoid exhaustive research that may not yield useful insights.
+
+2. **Iterative Design**: In this phase, the team designs, prototypes, and reviews the eLearning solution. Feedback from stakeholders is crucial for refining the design and ensuring it meets training needs. This phase includes project planning to identify tasks, responsibilities, and timelines, while maintaining a focus on minimal documentation.
+
+3. **Iterative Development**: The final solution is developed and implemented in iterations, producing alpha, beta, and gold versions. Continuous feedback from stakeholders helps to refine the solution and prevent budget overruns or delays. The development phase also includes the creation of a Design Proof, which serves as a functional demonstration of the proposed solution, integrating samples of all components to test and prove viability.
+
+### The Most Distinctive Perks of the SAM
+
+The SAM model offers several key benefits:
+- **Quality Growth**: SAM allows for the quick development of imperfect solutions that can be tested and refined multiple times, leading to a more tailored final product.
+- **Efficiency in Iterations**: As the project progresses, the duration of iterations often decreases, allowing for faster refinement based on stakeholder feedback.
+- **Creativity and Adaptability**: The iterative nature of SAM fosters creativity and allows teams to pivot quickly when something isn’t working, ultimately leading to more innovative solutions.
+
+### Unique Aspects of the SAM Process
+
+In SAM, the design phase begins with a brainstorming session known as a "Savvy Start," where designers present initial ideas based on instinct rather than exhaustive analysis. This approach shifts the focus from the broad question of "What should we do?" to the more constructive "Why shouldn’t we do this?" This targeted inquiry helps clarify project requirements and stakeholder priorities while fostering a collaborative environment.
+
+The development phase is interleaved with design, relying on rapid prototyping to facilitate ongoing analysis and refinement. Prototypes serve as functional substitutes for detailed documentation, minimizing miscommunication and enhancing clarity in the design process. Multiple types of prototypes, including media, functional, integrated, and special-purpose prototypes, can be developed to test and communicate ideas effectively.
+
+Upon completing the first prototype, the evaluation phase revisits the design, asking the same critical question to uncover hidden information and refine the solution further. This cyclical process ensures that valuable insights are gained early, preventing misalignment and enhancing the overall effectiveness of the instructional design.
+
+### Working Backwards and Constructive Inquiry
+
+A distinctive feature of SAM is the emphasis on working backwards from the desired performance outcomes. Designers begin by envisioning the final instructional experience and identifying the competencies learners must demonstrate before they can work independently. This approach ensures that learning experiences are closely aligned with real-world performance conditions, reducing interpretive variance and potential surprises.
+
+Additionally, SAM encourages a constructive inquiry process by asking, "Why shouldn’t we do this?" This method fosters open dialogue about proposed designs, allowing teams to quickly generate initial concepts based on readily available information about learners, performance needs, and potential challenges.
+
+### SAM1 vs. SAM2
+
+SAM can be applied in two variations: SAM1 and SAM2. SAM1 is suitable for smaller projects, allowing for a simple, fast, and productive process where design and development interleave with evaluation. In contrast, SAM2 is designed for larger projects that require more structure, involving distinct phases of preparation, iterative design, and iterative development while still preserving the iterative nature of the process.
+
+### Project Planning
+
+Project planning within SAM involves a quantitative assessment of remaining project development details affecting timeline and budget. It requires careful consideration of cost, quality management, resources, communications, risks, schedule, scope, and staffing implications. SAM acknowledges that no project is ever perfect, but through repeated iterations, projects can evolve closer to perfection. This practicality allows for more certainty regarding project availability on a preset date, as functional prototypes can be utilized even in their early stages.
+
+### Evaluation Phases: Alpha, Beta, and Gold
+
+The SAM process includes distinct evaluation phases: 
+
+- **Alpha**: The alpha product is a complete version of the instructional application, validated against the approved design. It includes all content and media, with known issues documented for further refinement. Evaluation at this stage identifies deviations from style guides, graphical errors, and functional problems.
+
+- **Beta**: The beta release is a modified version of the alpha, incorporating changes identified during its evaluation. This stage aims to eliminate functional errors, with both subject matter experts and actual learners evaluating the content.
+
+- **Gold**: The gold release represents the final phase of development, where the courseware is fully usable within the approved project guidelines. Any remaining issues must be resolved before rollout, which ideally leads to an evaluation study to assess whether targeted behaviors are achieved.
+
+### Conclusion
+
+In summary, the Successive Approximation Model is a dynamic and collaborative approach to instructional design that prioritizes flexibility, stakeholder engagement, and continuous improvement. It addresses the need for a simpler, faster, and more practical model compared to traditional methods like ADDIE, making it particularly suitable for contemporary instructional design challenges. Its emphasis on rapid prototyping and iterative feedback can lead to more effective and customized learning experiences. Additionally, SAM encourages minimizing upfront analysis, assembling diverse teams for collaborative brainstorming, and designing backward from advanced skills, all of which contribute to a more efficient and impactful instructional design process. The model's structured evaluation phases—alpha, beta, and gold—further enhance its effectiveness by ensuring that the final product meets quality standards and learner needs.

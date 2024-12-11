@@ -1,0 +1,29 @@
+### Overview of the Core Principles and Philosophy of Learning Transfer Evaluation: The Decisive Dozen (Dr. Will Thalheimer, PhD)
+
+The Decisive Dozen is a framework developed by Dr. Will Thalheimer that focuses on enhancing the transfer of learning from educational settings to real-world applications. The model emphasizes the importance of designing learning experiences that not only impart knowledge but also ensure that learners can effectively apply what they have learned in their jobs or daily lives. The core principles revolve around understanding the context of learning, the needs of the learners, and the conditions that facilitate effective transfer.
+
+### Key Factors to Consider When Using the Model
+
+- **Relevance**: Ensure that the learning content is directly applicable to the learners' tasks.
+- **Engagement**: Design interactive and engaging learning experiences to maintain learner interest.
+- **Feedback**: Provide timely and constructive feedback to reinforce learning.
+- **Practice**: Incorporate opportunities for learners to practice skills in realistic scenarios.
+- **Support**: Offer ongoing support and resources to help learners apply their knowledge post-training.
+- **Assessment**: Use assessments that measure not just knowledge but the ability to apply learning.
+- **Environment**: Consider the learning environment and its impact on transferability.
+- **Collaboration**: Encourage collaborative learning to enhance understanding and application.
+- **Motivation**: Foster intrinsic motivation to encourage learners to apply their skills.
+- **Follow-up**: Implement follow-up strategies to reinforce learning and application.
+- **Alignment**: Ensure alignment between learning objectives and organizational goals.
+- **Evaluation**: Continuously evaluate the effectiveness of the learning experience in promoting transfer.
+
+### Steps to Systematically Evaluate Learning Content with the Model
+
+1. **Define Learning Objectives**: Clearly articulate what learners should be able to do after the training.
+2. **Analyze Learner Needs**: Assess the specific needs and contexts of the learners to tailor the content.
+3. **Design Learning Activities**: Create engaging and relevant activities that promote active learning and practice.
+4. **Implement Feedback Mechanisms**: Integrate feedback loops throughout the learning process.
+5. **Facilitate Practice Opportunities**: Provide scenarios and simulations for learners to apply their knowledge.
+6. **Evaluate Transfer**: Use assessments and real-world observations to measure the application of learning.
+7. **Gather Data**: Collect data on learner performance and feedback to inform future improvements.
+8. **Iterate and Improve**: Use the evaluation data to refine and enhance the learning content and delivery methods.
