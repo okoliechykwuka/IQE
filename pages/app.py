@@ -298,7 +298,7 @@ class CourseEvaluatorApp:
 
         # Title at the top of the page
         st.markdown(
-            '<h1 class="main-title">Instructional Quality Agent Prototype (IQA)</h1>',
+            '<h1 class="main-title">Instructional Quality Agent (IQA)  Prototype</h1>',
             unsafe_allow_html=True,
         )
 
@@ -366,7 +366,7 @@ class CourseEvaluatorApp:
         #     if not (uploaded_file or st.session_state['youtube_url']):
         #         del st.session_state['content']
         if st.session_state["content_is_large"]:
-            st.warning("Content is Large for system to process")
+            st.warning("Large Content Detected")
 
         if "design_evaluator" not in st.session_state:
             with st.spinner("Building Evaluator Models"):

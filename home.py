@@ -2,8 +2,11 @@ import streamlit as st
 
 st.set_page_config(page_title="Welcome", layout="centered")
 
-st.write("# Welcome to Instructional Quality Agent Prototype")
-
+# Title at the top of the page
+st.markdown(
+    '<h1 class="main-title">Welcome to Instructional Quality Agent (IQA) Prototype</h1>',
+    unsafe_allow_html=True,
+)
 st.markdown(
     """Refine your course content effortlessly in just 10-15 minutes.
             Upload your materials (PDF, MP3, MP4, or YouTube link) to get actionable feedback on design, transferability, and performance. Your input is private and securely analyzed using advanced AI insights.
