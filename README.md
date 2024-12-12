@@ -1,6 +1,6 @@
-# Instructional Quality Prototype (IQA)
+# Instructional Quality Agent (IQA) Prototype
 
-Welcome to the **Instructional Quality Prototype (IQA)**! This application is a virtual evaluation assistant designed to help you assess and improve the quality of your instructional materials. Whether you're working on course design, transferability, or performance improvement, IQA has you covered.
+Welcome to the **Instructional Quality Agent Prototype (IQA)**! This application is a virtual evaluation assistant designed to help you assess and improve the quality of your instructional materials. Whether you're working on course design, transferability, or performance improvement, IQA has you covered.
 
 ## Features
 - **File Upload:** Upload and analyze course materials in PDF, MP3, or MP4 formats.
@@ -84,17 +84,7 @@ Application will run at http://localhost:8501
    - Process onboarding materials through all three frameworks.
    - Identify key areas for improvement and create a comprehensive improvement plan.
 
----
 
-## Feedback and Support
-We value your feedback! If you encounter any issues or have suggestions, feel free to open an issue in the repository or contact us at `support@example.com`.
-
----
-
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
 
 Enjoy evaluating and improving your instructional materials with IQA! 🚀
 
